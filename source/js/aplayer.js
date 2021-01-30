@@ -32,9 +32,17 @@ function setAPlayerObserver() {
   try {
     APlayerController.player.on('play', function(e) {
       updateAPlayerControllerStatus();
+      var index = document.querySelector('meting-js').aplayer.list.index;
+			var title = document.querySelector('meting-js').aplayer.list.audios[index].title;
+			var artist = document.querySelector('meting-js').aplayer.list.audios[index].artist;
+			$.message({title: '音乐通知',message: '正在播放：' + title + ' - ' + artist,type: 'success'});
     });
     APlayerController.player.on('pause', function(e) {
       updateAPlayerControllerStatus();
+      var index = document.querySelector('meting-js').aplayer.list.index;
+			var title = document.querySelector('meting-js').aplayer.list.audios[index].title;
+			var artist = document.querySelector('meting-js').aplayer.list.audios[index].artist;
+			$.message({title: '音乐通知',message: '暂停播放：' + title + ' - ' + artist,type: 'success'});
     });
     APlayerController.player.on('volumechange', function(e) {
       onUpdateAPlayerVolume();
@@ -43,6 +51,11 @@ function setAPlayerObserver() {
       // 跳到下一曲时更新标题
       updateTitle();
     });
+    APlayerController.player.on('error', function (e) { // 音乐加载失败
+			var index = document.querySelector('meting-js').aplayer.list.index;
+			var title = document.querySelector('meting-js').aplayer.list.audios[index].title;
+			$.message({title: "音乐通知",message: "歌曲：" + title + "加载失败~",type: 'warning'});
+		});
 
     // 监听音量手势
     APlayerController.volumeBarWrap = document.getElementsByClassName('nav volume')[0].children[0];
