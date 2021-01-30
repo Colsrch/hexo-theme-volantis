@@ -18,9 +18,15 @@
 <%- partial('../../_third-party/fancybox/script') %>
 
 <!-- internal -->
+
 <%- partial('cover') %>
+
 <% if (theme.rightmenu.enable == true) { %>
   <%- partial('../rightmenu') %>
+<% } %>
+<!-- rightmenu要在darkmode之前（ToggleButton） darkmode要在comments之前（volantis.dark.push）-->
+<% if (theme.plugins.darkmodejs.enable) { %>
+  <%- partial('darkmode') %>
 <% } %>
 
 <%- partial('issues') %>
@@ -83,13 +89,11 @@
   <%- partial('counter') %>
 <% } %>
 
-<% if (theme.plugins.darkmodejs.enable) { %>
-  <%- partial('darkmode') %>
-<% } %>
-
 <%- partial('../../_third-party/analytics/script') %>
 
 <%- partial('../../_third-party/tidio/script') %>
+
+<%- partial('../../_third-party/parallax/script') %>
 
 <%- partial('toc') %>
 
