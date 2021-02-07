@@ -306,7 +306,7 @@
         input.select();
         document.execCommand('copy');
         document.body.removeChild(input);
-        //$.message({title:'复制成功',message: str,type:'success'});
+        volantis.message('复制成功', str, 'success');
         fn.hideMenu();
       }
 
